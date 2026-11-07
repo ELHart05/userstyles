@@ -76,6 +76,7 @@ collaborators:
   - &TheAnonymousCrusher TheAnonymousCrusher
   - &42willow 42willow
   - &Papweer Papweer
+  - &ELHart05 ELHart05
 
 userstyles:
   advent-of-code:
@@ -391,6 +392,12 @@ userstyles:
     icon: googlegemini
     color: mauve
     current-maintainers: [*Dandraghas, *WalkQuackBack]
+  gtfobins:
+    name: GTFOBins
+    link: https://gtfobins.org
+    categories: [development, wiki]
+    color: red
+    current-maintainers: [*ELHart05]
   hackage:
     name: Hackage
     link: https://hackage.haskell.org

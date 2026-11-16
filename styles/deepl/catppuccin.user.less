@@ -53,9 +53,12 @@
     --dui-color-background-surface-invert: @text;
     --dui-color-background-surface-neutral: @surface0;
     --dui-color-background-surface-neutral-hover: @surface-hover;
+    --dui-color-background-surface-neutral-pressed: @surface-hover;
     --dui-color-background-surface-neutral-muted: @surface-soft;
     --dui-color-background-surface-neutral-muted-hover: @surface-hover;
     --dui-color-background-surface-neutral-muted-pressed: @surface-hover;
+    --dui-color-background-surface-primary: @accent;
+    --dui-color-background-surface-primary-muted: @surface-soft;
     --dui-color-background-surface-info: @blue;
     --dui-color-background-surface-info-muted: @mantle;
     --dui-color-background-surface-success: @green;
@@ -64,9 +67,13 @@
     --dui-color-background-surface-warning-muted: @mantle;
     --dui-color-background-surface-danger: @red;
     --dui-color-background-surface-danger-muted: @mantle;
+    --dui-color-background-action: @base;
     --dui-color-background-action-active: @surface-soft;
+    --dui-color-background-action-active-alternative: @surface-soft;
     --dui-color-background-action-brand: @accent;
     --dui-color-background-action-primary: @accent;
+    --dui-color-background-action-primary-hover: @hover;
+    --dui-color-background-action-primary-pressed: @hover;
     --dui-color-background-action-basic: @surface-soft;
     --dui-color-background-action-basic-hover: @surface-hover;
     --dui-color-background-action-basic-pressed: @surface-hover;
@@ -88,12 +95,16 @@
     --dui-color-text-success: @green;
     --dui-color-text-success-muted: @green;
     --dui-color-text-warning: @yellow;
+    --dui-color-text-warning-muted: @yellow;
+    --dui-color-text-brand: @accent;
     --dui-color-text-danger: @red;
     --dui-color-text-danger-muted: @red;
     --dui-color-text-action: @text;
     --dui-color-text-action-basic: @text;
     --dui-color-text-action-ghost: @text;
     --dui-color-text-action-active: @accent;
+    --dui-color-text-action-active-alternative: @accent;
+    --dui-color-text-action-danger: @base;
     --dui-color-text-action-invert: @base;
     --dui-color-text-action-primary: @base;
     --dui-color-text-action-disabled: @overlay1;
@@ -113,8 +124,13 @@
     --dui-color-border-surface-warning: @yellow;
     --dui-color-border-surface-danger: @red;
     --dui-color-border-action-active: @accent;
+    --dui-color-border-action-active-alternative: @accent;
     --dui-color-border-action-basic-default: @surface1;
     --dui-color-border-action-basic-hover: @surface2;
+    --dui-color-border-action-basic-active: @accent;
+    --dui-color-border-action-basic-pressed: @surface2;
+    --dui-color-border-action-secondary-default: @surface1;
+    --dui-color-border-action-secondary-hover: @surface2;
     --dui-color-border-action-disabled: @surface1;
     --dui-color-border-action-danger: @red;
     --dui-color-border-action-success: @green;
@@ -259,6 +275,10 @@
     [class*="_&]:bg-surface-canvas"] {
       background-color: @base !important;
     }
+    /* Signed in, the app shell gets its own background */
+    &.is-logged-in [class*="_&]:bg-surface-canvas-secondary"] {
+      background-color: @mantle !important;
+    }
     .bg-surface-canvas-secondary,
     .bg-surface-secondary,
     .bg-surface-info-muted,
@@ -267,7 +287,8 @@
     .bg-surface-warning-muted,
     .bg-surface-danger-muted,
     .bg-gray-50,
-    .bg-redesign-quartz-gray-200 {
+    .bg-redesign-quartz-gray-200,
+    .sm\:bg-redesign-quartz-gray-200 {
       background-color: @mantle;
     }
     .bg-brand,
@@ -293,7 +314,8 @@
     .hover\:bg-white:hover,
     .hover\:bg-surface-primary-muted:hover,
     .hover\:bg-surface-info-muted:hover,
-    .hover\:bg-redesign-quartz-gray-200:hover {
+    .hover\:bg-redesign-quartz-gray-200:hover,
+    .sm\:hover\:bg-redesign-quartz-gray-300:hover {
       background-color: @surface0;
     }
     .bg-surface-raised,
@@ -589,9 +611,140 @@
     svg [fill="#0F2B46" i] {
       fill: @text;
     }
+    /* Icon tiles, the icons on them are dark */
+    .size-8.bg-redesign-sapphire-blue-300 {
+      background-color: @blue;
+    }
+    .size-8.bg-redesign-amethyst-purple-300 {
+      background-color: @mauve;
+    }
+    /* Sidebar logo when signed in, a dark blue image */
+    img[src*="deepl-logo-blue"] {
+      filter: @accent-filter;
+    }
+
+    /* Account pages */
+    .before\:bg-blue-500::before {
+      background-color: @accent;
+    }
+    .ui-selected\:border-b-action-active[data-headlessui-state~="selected"] {
+      border-bottom-color: @accent;
+    }
+
+    /* Toasts, the library behind them sets its own light colours */
+    [data-sonner-toaster][data-sonner-theme] {
+      --normal-bg: @surface-soft;
+      --normal-bg-hover: @surface-hover;
+      --normal-border: @surface1;
+      --normal-border-hover: @surface2;
+      --normal-text: @text;
+      --success-bg: @surface-soft;
+      --success-border: @green;
+      --success-text: @green;
+      --info-bg: @surface-soft;
+      --info-border: @blue;
+      --info-text: @blue;
+      --warning-bg: @surface-soft;
+      --warning-border: @yellow;
+      --warning-text: @yellow;
+      --error-bg: @surface-soft;
+      --error-border: @red;
+      --error-text: @red;
+    }
+    [data-sonner-toast][data-styled] {
+      [data-description] {
+        color: @subtext1;
+      }
+      [data-cancel] {
+        color: @text;
+        background-color: @surface-hover;
+      }
+    }
+
     /* The shadow alone is lost on dark flavours */
     [class*="_flyoutPanel"] {
       box-shadow: 0 0 0 1px @surface0, 0 4px 16px fade(@crust, 50%);
+    }
+
+    /* Promo banner under the header, a cream box with a glow at both ends */
+    .below-navigation-banner-wrapper {
+      background-color: @mantle;
+
+      /* The glow is drawn with inline gradients */
+      [style*="#b9a2ff"] {
+        background: linear-gradient(
+          90deg,
+          fade(@accent, 30%),
+          transparent 20%,
+          transparent 80%,
+          fade(@accent, 30%)
+        ) !important;
+      }
+      /* A green glow and cream dots on top of it */
+      [style*="radial-gradient"],
+      [style*="svg+xml"] {
+        display: none;
+      }
+    }
+
+    /* Sections on a light drawing or photo keep it in every flavour, so the
+       text and controls on them use a fixed dark and light pair */
+    @ink: if(@flavor = latte, @text, @crust);
+    @paper: if(@flavor = latte, @base, @text);
+
+    [class*="bg-[#fdfaf4]"]:not(.below-navigation-banner-wrapper),
+    section[style*="39L7ybTNHWMFDbzs2QtQil"] {
+      color: @ink;
+
+      h1,
+      h2,
+      h5,
+      legend,
+      .text-black,
+      .text-gray-900,
+      [class*="text-[var(--color-gray-800-hex)]"] {
+        color: @ink;
+      }
+      .text-gray-400,
+      .text-gray-500 {
+        color: fade(@ink, 70%);
+      }
+      .bg-white,
+      [class*="bg-white/"] {
+        background-color: fade(@paper, 70%);
+      }
+      [class*="bg-black/"] {
+        background-color: fade(@ink, 8%);
+      }
+      .\!text-black {
+        color: @ink !important;
+      }
+    }
+
+    /* Aure page: black buttons and cream cards */
+    .bg-black {
+      background-color: @crust;
+    }
+    .\!text-white,
+    .\!text-black {
+      color: @text !important;
+    }
+    /* The blurred strip behind its sticky header */
+    [class*="bg-white/"] {
+      background-color: fade(@base, 70%);
+    }
+    [class*="bg-[#fdf9f4]"] {
+      background-color: @surface-soft;
+
+      img {
+        filter: @text-filter;
+      }
+    }
+
+    /* Arrow on the product cards, only filled on hover */
+    [class*="_card"]:hover [class*="_arrowContainer"] {
+      color: @base;
+      background-color: @accent;
     }
 
     /* HubSpot form, Stylus also styles its about:blank frame */
@@ -654,9 +807,20 @@
     .from-white {
       --tw-gradient-from: @base;
     }
+    /* Preview cards on the Projects and Translation flows pages */
+    .from-surface-info-muted {
+      --tw-gradient-from: @mantle;
+    }
+    [class*="bg-surface-raised/95"] {
+      background-color: fade(@surface-soft, 95%);
+    }
 
     input[class*="_input"] {
       background-color: @base;
+    }
+    /* The share link field, plain inputs are white in the base sheet */
+    input.border-default {
+      background-color: @surface-soft;
     }
     /* Form fields where the box around the input already has the field colour */
     .__container > .__input {
